@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON</title>
+</head>
+<body>
+    <h1>JSON</h1>
+    <h2>User Name</h2>
+    <ul id="user-container">
+
+    </ul>
+    <h2>Name</h2>
+    <ul id="user-container2">
+
+    </ul>
+
+    <h2>Email</h2>
+    <ul id="user-container3">
+
+    </ul>
+
+    <script>
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(json => displayUser(json))
+        .catch(error => console.log(error));
+        
+        function displayUser(user) {
+            console.log(user);
+            const userNames = user.map(user => user.username);
+            const ul = document.getElementById('user-container');
+            for (let i = 0; i < userNames.length; i++) {
+                const username = userNames[i];
+                const li = document.createElement('li');
+                li.innerText = username;
+                ul.appendChild(li);
+            }
+
+            const names = user.map(user => user.name);
+            const nameUl = document.getElementById('user-container2');
+
+            for (let i = 0; i < names.length; i++) {
+                const name = names[i];
+                const nameLi = document.createElement('li');
+                nameLi.innerText = name;
+                nameUl.appendChild(nameLi);
+            }
+
+            const emails = user.map(user => user.email);
+            const emailUl = document.getElementById('user-container3');
+            for (let i = 0; i < emails.length; i++) {
+                const email = emails[i];
+                const emailLi = document.createElement('li');
+                emailLi.innerText = email;
+                emailUl.appendChild(emailLi);
+            }
+            
+        }
+    </script>
+</body>
+</html>
